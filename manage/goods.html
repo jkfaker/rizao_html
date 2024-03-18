@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="../utils/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  td {
+    min-width: 100px;
+    min-height: 100px;
+  }
+</style>
+
+<body>
+  <div class="container-fluid" id="app">
+    <div class="row">
+
+      <!-- 侧边栏 -->
+      <!-- <div class="col-md-2 bg-dark text-light text-center" style="position: relative; height: 100%; overflow-y: auto;">
+        <ul class="list-unstyled fw-normal pb-5 pt-5 pl-5">
+          <li @click="index = 1" style="cursor: pointer;" class="pb-2">商品列表</li>
+          <li @click="index = 2" style="cursor: pointer;" class="pb-2">添加商品</li>
+          <li @click="index = 3" style="cursor: pointer;" class="pb-2">评论列表</li>
+          <li @click="index = 4" style="cursor: pointer;" class="pb-2">管理员列表</li>
+        </ul>
+      </div> -->
+      <!-- <div class="col-md-10"> -->
+      <!-- 顶部导航栏 -->
+      <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#" @click="index = 1">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" @click="index = 1" :class="index === 1?'active' : ''" aria-current="page"
+                href="#">商品列表</a>
+              <a class="nav-link" @click="index = 2" :class="index === 2?'active' : ''" href="#">添加商品</a>
+              <a class="nav-link" @click="index = 3" :class="index === 3?'active' : ''" href="#">评论列表</a>
+              <a class="nav-link" @click="index = 4" :class="index === 4?'active' : ''" href="#">管理员列表</a>
+            </div>
+          </div>
+          <!-- 查询 -->
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+      <!-- 商品列表界面--index = 1 -------------------------------------------------------------------------------->
+      <div style="width: 2000px;" v-if="index === 1">
+        <div>
+          <table class="table" align="center">
+            <thead>
+              <tr>
+                <th scope="col">商品id</th>
+                <th scope="col">大标题</th>
+                <th scope="col">销量</th>
+                <th scope="col">价格</th>
+                <th scope="col">介绍</th>
+                <th scope="col">产地</th>
+                <th scope="col">类别</th>
+                <th scope="col">图片1</th>
+                <th scope="col">图片2</th>
+                <th scope="col">图片3</th>
+                <th scope="col">图片4</th>
+                <th scope="col">图片5</th>
+                <th scope="col">图片6</th>
+                <th scope="col">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in list" :key="item.id">
+                <td v-for="value in item"> {{ value }} </td>
+                <td v-for="i in 6">
+                  <!-- <img v-if="imgPath = picOrUpload(item.id, i)" :src="imgPath"> -->
+                  <img v-if="picOrUpload(item.id, i)" :src="picOrUpload(item.id, i)">
+                  <input type="file" v-if="(!picOrUpload(item.id, i))" class="form-control uploadImg"
+                    @change="uploadImg(i, item.id, $event)">
+                </td>
+                <td>
+                  <button class="btn btn-primary" @click="getTextById(item.id)">编辑</button>
+                  <button class="btn btn-danger" @click="deleteById(item.id)">删除</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Modal -->
+        <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">新增商品界面</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                输入内容
+                <div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">id</span>
+                    <input type="text" class="form-control" placeholder="自动分配" aria-label="" disabled>
+                    <span class="input-group-text">价格¥</span>
+                    <input type="text" class="form-control" placeholder="price" aria-label="price"
+                      v-model="goods.price">
+                    <span class="input-group-text">产地</span>
+                    <input type="text" class="form-control" placeholder="producer" aria-label="producer"
+                      v-model="goods.producer">
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">标题</span>
+                    <input type="text" class="form-control" placeholder="name" aria-label="name" v-model="goods.name">
+                  </div>
+                  <div>
+                    <span class="input-group-text">分类</span>
+                    <input type="text" class="form-control" placeholder="classification" aria-label="classification"
+                      v-model="goods.classification">
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-text">商品介绍</span>
+                    <textarea class="form-control" aria-label="detail" v-model="goods.detail"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" @click="add()" data-bs-dismiss="modal">确认</button>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- <div>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            新增商品
+          </button>
+        </div> -->
+      </div>
+      <!-- 添加商品界面--index = 2 -------------------------------------------------------------------------------->
+      <div class="container offset-1 mt-5" v-if="index === 2">
+        <div class="row">
+          <div class="col-3">
+            <div class="mb-3">
+              <label for="staticEmail" class="col-form-label">id</label>
+              <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example"
+                disabled>
+            </div>
+            <div class="mb-3">
+              <label for="staticEmail" class="col-form-label" v-model="goods.name">大标题</label>
+              <input class="form-control form-control-lg" type="text" placeholder="大标题"
+                aria-label=".form-control-lg example">
+            </div>
+            <div class="mb-3">
+              <label for="staticEmail" class="col-form-label" v-model="goods.price">价格</label>
+              <input class="form-control form-control-lg" type="text" placeholder="5.88"
+                aria-label=".form-control-lg example">
+            </div>
+            <div class="mb-3">
+              <label for="staticEmail" class="col-form-label" v-model="goods.producer">产地</label>
+              <input class="form-control form-control-lg" type="text" placeholder="中国 北京"
+                aria-label=".form-control-lg example">
+            </div>
+            <div class="mb-3">
+              <label for="staticEmail" class="col-form-label" v-model="goods.classification">类别</label>
+              <input class="form-control form-control-lg" type="text" placeholder="家用品"
+                aria-label=".form-control-lg example">
+            </div>
+          </div>
+          <div class="col-1">
+            <div style="border-left: 1px solid gray;height: 100%; position: relative;"></div>
+          </div>
+          <div class="col-6 text-left">
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">商品详细介绍</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="goods.detail"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" @click="index === 2 ? addText() : editText()" data-bs-dismiss="modal">确认</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../utils/bootstrap.min.js"></script>
+  <script src="../utils/axios.min.js"></script>
+  <script src="../utils/vue.js"></script>
+  <!-- <script src="../js/checkLogin.js"></script> -->
+  <script src="../js/request.js"></script>
+  <script>
+    const URL = '/api/manage/';  // linux后端地址
+    // const URL = 'http://localhost:8080/manage/';  // windows后端地址
+    const app = new Vue({
+      el: '#app',
+      data: {
+        index: 1, // index = 2为新增商品界面，index = 5 为编辑商品界面
+        img: '',
+        imgId: '',
+        list: [],
+        imgList: [],
+        goods: {
+          id: '',
+          price: '',
+          producer: '',
+          name: '',
+          classification: '',
+          detail: '',
+        },
+      },
+      mounted: function () {
+        this.getAll();
+        this.getAllImg();
+      },
+      methods: {
+        // 页面刚开始加载时获取所有商品信息
+        getAll() {
+          axios({
+            url: URL + "goods",
+          }).then(result => {
+            this.list = result.data.data;
+            console.log(this.list);
+          })
+        },
+        // 页面开始加载时获取所有图片信息
+        getAllImg() {
+          axios({
+            url: URL + "img",
+          }).then(result => {
+            this.imgList = result.data.data;
+            console.log(this.imgList);
+          })
+        },
+        // 获取指定id商品信息
+        getTextById(id) {
+          this.index = 5;
+          axios({
+            url: URL + "goods",
+            params: {
+              id: id
+            },
+          }).then(result => {
+            this.goods = result.data.data;
+            console.log(this.goods);
+          })
+        },
+        // 添加非图片数据
+        addText() {
+          axios({
+            url: URL + "goods",
+            method: "POST",
+            data: this.goods
+          }).then(() => {
+            for (let key in this.goods) {
+              this.goods[key] = null;
+            }
+            this.get();
+          })
+        },
+
+        // 数据中的删除按钮
+        deleteById(id) {
+          axios({
+            url: URL + "goods/" + id,
+            method: "DELETE"
+          }).then(() => {
+            this.get();
+            this.getImg();
+          })
+        },
+
+        // 图片 or 上传？
+        picOrUpload(goodsId, imgId) {
+          // 文件相对路径
+          const Path = "../uploads/"
+          // 查找goodsId和imgId都符合条件的图片
+          const imgObj = this.imgList.find(item => item.goodsId === goodsId && item.imgId === imgId);
+          // console.log("imageName: "+ imgObj.imageName);
+          return imgObj ? (Path + imgObj.imageName) : null;
+        },
+
+        // 上传单个图片
+        uploadImg(imgId, goodsId, event) {
+          console.log(event.target.files[0]);
+          const fd = new FormData();
+          fd.append('imgId', imgId);
+          fd.append('goodsId', goodsId);
+          fd.append('img', event.target.files[0]);
+          axios({
+            url: URL + "img",
+            method: "POST",
+            data: fd
+          }).then(result => {
+            this.getImg();
+          })
+        },
+
+        // 1，编辑商品时跳转到添加商品界面
+        // 2，查找对应的商品信息
+        // 3，将找到的商品信息复制到对应的input框中
+        // 4，点击提交修改商品信息
+        editText() {
+          axios({
+            url: URL + "goods/" + id,
+            method: "PUT",
+            data: this.goods,
+          }).then(result => {
+            console.log(result);
+          })
+        },
+      },
+    })
+  </script>
+</body>
+
+</html>

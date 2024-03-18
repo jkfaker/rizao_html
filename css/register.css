@@ -1,0 +1,49 @@
+html,
+body {
+  background-color: #edf0f5;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 520px;
+  height: 540px;
+  background-color: #fff;
+  padding: 60px;
+  box-sizing: border-box;
+}
+
+.container h3 {
+  font-weight: 900;
+}
+
+.form_wrap {
+  color: #8b929d !important;
+}
+
+.form-text {
+  color: #8b929d !important;
+}
+
+.alert {
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.alert.show {
+  opacity: 1;
+}
+
+.pass-button-full-disabled {
+  opacity: .4!important;
+}
+
+.login-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  
+}
