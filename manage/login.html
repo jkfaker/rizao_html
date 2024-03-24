@@ -44,8 +44,8 @@
     // 目标1：点击登录时，用户名和密码长度判断，并提交数据和服务器通信
     // 目标2：使用提示框，反馈提示消息
     // 2.1 获取提示框
-    // const loginURL = "http://127.0.0.1:8080/manage/login";  windows
-    const loginURL = "/api/manage/login"
+    // const loginURL = "http://127.0.0.1:8080/manage/login/"; // windows
+    const loginURL = "/api/manage/login/"
     const myAlert = document.querySelector(".alert");
     /**
      * 2.2 封装提示框函数，重复调用，满足提示需求
@@ -120,6 +120,7 @@
           if (result.data.code == 1) {
             alertFn("登录成功！两秒后跳转", true);
             localStorage.setItem('token',result.data.data);
+            console.log(result.data.data);
             setTimeout(() => {
               window.location.href = "./goods.html";
             }, 2000);

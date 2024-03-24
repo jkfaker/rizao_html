@@ -45,9 +45,10 @@
             <div class="navbar-nav">
               <a class="nav-link" @click="index = 1" :class="index === 1?'active' : ''" aria-current="page"
                 href="#">商品列表</a>
-              <a class="nav-link" @click="index = 2" :class="index === 2?'active' : ''" href="#">添加商品</a>
+              <a class="nav-link" @click="index = 2" :class="index === 2 || index === 6 ? 'active' : ''" href="#">添加商品</a>
               <a class="nav-link" @click="index = 3" :class="index === 3?'active' : ''" href="#">评论列表</a>
               <a class="nav-link" @click="index = 4" :class="index === 4?'active' : ''" href="#">管理员列表</a>
+              <a class="nav-link" @click="index = 5" :class="index === 5?'active' : ''" href="#">后台日志</a>
             </div>
           </div>
           <!-- 查询 -->
@@ -96,58 +97,9 @@
             </tbody>
           </table>
         </div>
-        <!-- Modal -->
-        <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-          aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">新增商品界面</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                输入内容
-                <div>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text">id</span>
-                    <input type="text" class="form-control" placeholder="自动分配" aria-label="" disabled>
-                    <span class="input-group-text">价格¥</span>
-                    <input type="text" class="form-control" placeholder="price" aria-label="price"
-                      v-model="goods.price">
-                    <span class="input-group-text">产地</span>
-                    <input type="text" class="form-control" placeholder="producer" aria-label="producer"
-                      v-model="goods.producer">
-                  </div>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text">标题</span>
-                    <input type="text" class="form-control" placeholder="name" aria-label="name" v-model="goods.name">
-                  </div>
-                  <div>
-                    <span class="input-group-text">分类</span>
-                    <input type="text" class="form-control" placeholder="classification" aria-label="classification"
-                      v-model="goods.classification">
-                  </div>
-                  <div class="input-group">
-                    <span class="input-group-text">商品介绍</span>
-                    <textarea class="form-control" aria-label="detail" v-model="goods.detail"></textarea>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" @click="add()" data-bs-dismiss="modal">确认</button>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!-- <div>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            新增商品
-          </button>
-        </div> -->
       </div>
       <!-- 添加商品界面--index = 2 -------------------------------------------------------------------------------->
-      <div class="container offset-1 mt-5" v-if="index === 2">
+      <div class="container offset-1 mt-5" v-if="index === 2 || index === 6">
         <div class="row">
           <div class="col-3">
             <div class="mb-3">
@@ -156,24 +108,24 @@
                 disabled>
             </div>
             <div class="mb-3">
-              <label for="staticEmail" class="col-form-label" v-model="goods.name">大标题</label>
-              <input class="form-control form-control-lg" type="text" placeholder="大标题"
+              <label for="staticEmail" class="col-form-label">大标题</label>
+              <input class="form-control form-control-lg" type="text" placeholder="大标题" v-model="goods.name"
                 aria-label=".form-control-lg example">
             </div>
             <div class="mb-3">
-              <label for="staticEmail" class="col-form-label" v-model="goods.price">价格</label>
-              <input class="form-control form-control-lg" type="text" placeholder="5.88"
+              <label for="staticEmail" class="col-form-label">价格</label>
+              <input class="form-control form-control-lg" type="text" placeholder="元" v-model="goods.price"
                 aria-label=".form-control-lg example">
             </div>
             <div class="mb-3">
-              <label for="staticEmail" class="col-form-label" v-model="goods.producer">产地</label>
-              <input class="form-control form-control-lg" type="text" placeholder="中国 北京"
+              <label for="staticEmail" class="col-form-label">产地</label>
+              <input class="form-control form-control-lg" type="text" placeholder="中国 北京" v-model="goods.producer"
                 aria-label=".form-control-lg example">
             </div>
             <div class="mb-3">
-              <label for="staticEmail" class="col-form-label" v-model="goods.classification">类别</label>
+              <label for="staticEmail" class="col-form-label">类别</label>
               <input class="form-control form-control-lg" type="text" placeholder="家用品"
-                aria-label=".form-control-lg example">
+                aria-label=".form-control-lg example" v-model="goods.classification">
             </div>
           </div>
           <div class="col-1">
@@ -182,17 +134,74 @@
           <div class="col-6 text-left">
             <div class="mb-3">
               <label for="exampleFormControlTextarea1" class="form-label">商品详细介绍</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="goods.detail"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                v-model="goods.detail"></textarea>
             </div>
           </div>
         </div>
         <div class="row text-center">
           <div>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary" @click="index === 2 ? addText() : editText()" data-bs-dismiss="modal">确认</button>
+            <button type="button" class="btn btn-primary" @click="index === 2 ? addText() : editText()"
+              data-bs-dismiss="modal">确认</button>
+            <button v-if="index === 2" type="button" class="btn btn-primary" data-bs-toggle="modal"
+              data-bs-target="#attention">批量上传</button>
+          </div>
+        </div>
+        <!-- modal attention ---------------------------------------------------------------------------------- -->
+        <div class="modal fade" id="attention" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="attentionLabel" aria-hidden="true" style="--bs-modal-width: 1000px;">
+          <div class="modal-dialog">
+            <div class="modal-content pb-5">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="attentionLabel">批量商品上传</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <h3>注意Attention:</h3>
+                <h4 style="color: red;">1,文件需要表头，必须且包含以下五项数据，否则将报错！！！</h4>
+                <div><img src="../images/FileImportUpload2.png" style="width: 500px;"></div>
+                <h4 style="color: red;">2,请上传CSV文件！excel导出方式如下:</h4>
+                <div>
+                  <img src="../images/FileImportUpload1.png" style="height: 600px; width: 960px;">
+                </div>
+
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">我点错了</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#FileImportGoods">我知道了</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal FileImportGoods ---------------------------------------------------------------- ------->
+        <div class="modal fade" id="FileImportGoods" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="FileImportGoodsLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content pb-5">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="FileImportGoodsLabel">上传csv文件</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <input type="file" class="form-control uploadImg" @change="saveFile" accept=".csv">
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="uploadFile">确认</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <!-- 评论列表界面--index = 3 -------------------------------------------------------------------------------->
+
+      <!-- 管理员管理界面--index = 4 -------------------------------------------------------------------------------->
+
+      <!-- 后台日志界面--index = 5 -------------------------------------------------------------------------------->
+
+
     </div>
   </div>
   <script src="../utils/bootstrap.min.js"></script>
@@ -219,6 +228,25 @@
           classification: '',
           detail: '',
         },
+        // 文件批量上传商品
+        file1: '',
+      },
+      // 监听index的值，去后端请求相应的数据
+      watch: {
+        index(newValue) {
+          // 当回到首页时，初始化其他无用的数值
+          if (newValue === 1) {
+            this.goods = {};
+            this.file1 = '';
+            this.getAll();
+            this.getAllImg();
+          }
+          if (newValue === 3) {
+            axios({
+
+            })
+          }
+        }
       },
       mounted: function () {
         this.getAll();
@@ -230,7 +258,7 @@
           axios({
             url: URL + "goods",
           }).then(result => {
-            this.list = result.data.data;
+            this.list = result.data;
             console.log(this.list);
           })
         },
@@ -239,20 +267,20 @@
           axios({
             url: URL + "img",
           }).then(result => {
-            this.imgList = result.data.data;
+            this.imgList = result.data;
             console.log(this.imgList);
           })
         },
         // 获取指定id商品信息
         getTextById(id) {
-          this.index = 5;
+          this.index = 6;
           axios({
             url: URL + "goods",
             params: {
               id: id
             },
           }).then(result => {
-            this.goods = result.data.data;
+            this.goods = result.data[0];
             console.log(this.goods);
           })
         },
@@ -266,7 +294,7 @@
             for (let key in this.goods) {
               this.goods[key] = null;
             }
-            this.get();
+            this.getAll();
           })
         },
 
@@ -276,7 +304,7 @@
             url: URL + "goods/" + id,
             method: "DELETE"
           }).then(() => {
-            this.get();
+            this.getAll();
             this.getImg();
           })
         },
@@ -307,10 +335,7 @@
           })
         },
 
-        // 1，编辑商品时跳转到添加商品界面
-        // 2，查找对应的商品信息
-        // 3，将找到的商品信息复制到对应的input框中
-        // 4，点击提交修改商品信息
+        // 单条商品信息编辑
         editText() {
           axios({
             url: URL + "goods/" + id,
@@ -319,6 +344,32 @@
           }).then(result => {
             console.log(result);
           })
+        },
+        // 批量添加商品信息上传csv文件
+        saveFile(event) {
+          this.file1 = event.target.files[0];
+        },
+        uploadFile(event) {
+          // console.log(event.target);
+          const that = this;
+          if (this.file1) {
+            const fd = new FormData();
+            fd.append('file', this.file1);
+            axios({
+              url: URL + "file",
+              method: "POST",
+              data: fd
+            }).then(result => {
+              console.log(result.msg);
+              alert(result.msg);
+              that.index = 1;
+            })
+
+
+          } else {
+            alert("请先选择文件");
+          }
+
         },
       },
     })
