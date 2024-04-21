@@ -141,7 +141,7 @@
         </div>
         <div class="row text-center">
           <div>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="index = 1">取消</button>
             <button type="button" class="btn btn-primary" @click="index === 2 ? addText() : editText()"
               data-bs-dismiss="modal">确认</button>
             <button v-if="index === 2" type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -198,12 +198,55 @@
       <!-- 评论列表界面--index = 3 -------------------------------------------------------------------------------->
 
       <!-- 管理员管理界面--index = 4 -------------------------------------------------------------------------------->
-
+      <div style="width: 2000px;" v-if="index === 4">
+        <div>
+          <table class="table" align="center">
+            <thead>
+              <tr>
+                <th scope="col">管理员id</th>
+                <th scope="col">昵称</th>
+                <th scope="col">管理员用户名</th>
+                <th scope="col">密码</th>
+                <th scope="col">手机号</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in adminList" :key="item.id">
+                <td v-for="value in item"> {{ value }} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <!-- 后台日志界面--index = 5 -------------------------------------------------------------------------------->
-
-
+      <div style="width: 2000px;" v-if="index === 5">
+        <div>
+          <table class="table" align="center">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">操作员</th>
+                <th scope="col">操作时间</th>
+                <th scope="col">执行类名</th>
+                <th scope="col">执行方法名</th>
+                <th scope="col">方法实参</th>
+                <th scope="col">返回值</th>
+                <th scope="col">执行总耗时</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in logsList" :key="item.id">
+                <td v-for="value in item"> {{ value }} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
+
+
+
   <script src="../utils/bootstrap.min.js"></script>
   <script src="../utils/axios.min.js"></script>
   <script src="../utils/vue.js"></script>
@@ -220,6 +263,8 @@
         imgId: '',
         list: [],
         imgList: [],
+        logsList: [], // 装有所有日志的列表
+        adminList: [],
         goods: {
           id: '',
           price: '',
@@ -241,10 +286,13 @@
             this.getAll();
             this.getAllImg();
           }
-          if (newValue === 3) {
-            axios({
-
-            })
+          // 向后端获取管理员列表
+          if (newValue === 4) {
+            this.getAdmin();
+          }
+          // 向后端获取日志列表
+          if (newValue === 5) {
+            this.getLogs();
           }
         }
       },
@@ -305,14 +353,14 @@
             method: "DELETE"
           }).then(() => {
             this.getAll();
-            this.getImg();
+            this.getAllImg();
           })
         },
 
         // 图片 or 上传？
         picOrUpload(goodsId, imgId) {
           // 文件相对路径
-          const Path = "../uploads/"
+          const Path = "../uploads/img/"
           // 查找goodsId和imgId都符合条件的图片
           const imgObj = this.imgList.find(item => item.goodsId === goodsId && item.imgId === imgId);
           // console.log("imageName: "+ imgObj.imageName);
@@ -331,18 +379,19 @@
             method: "POST",
             data: fd
           }).then(result => {
-            this.getImg();
+            this.getAllImg();
           })
         },
 
         // 单条商品信息编辑
         editText() {
           axios({
-            url: URL + "goods/" + id,
+            url: URL + "goods/" + this.goods.id,
             method: "PUT",
             data: this.goods,
           }).then(result => {
             console.log(result);
+            this.index = 1;
           })
         },
         // 批量添加商品信息上传csv文件
@@ -364,13 +413,28 @@
               alert(result.msg);
               that.index = 1;
             })
-
-
           } else {
             alert("请先选择文件");
           }
-
         },
+        // 获取日志列表
+        getLogs() {
+          axios({
+            url: URL + "logs",
+          }).then(result => {
+            this.logsList = result.data;
+            console.log(result.data);
+          })
+        },
+        // 获取管理员列表
+        getAdmin() {
+          axios({
+            url: URL + "admin",
+          }).then(result => {
+            this.adminList = result.data;
+            console.log(result.data);
+          })
+        }
       },
     })
   </script>

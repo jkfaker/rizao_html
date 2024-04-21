@@ -11,172 +11,176 @@
 
 <body>
   <div id="app">
-    <div>
-      <div class="top">
-        <!-- 页面顶部刘海 -->
-        <div class="top-container">
-          <!-- logo -->
-          <a href="./index.html">
-            <img class="top-logo" src="/images/logo1.jpg">
-          </a>
-          <!-- 占位div -->
-          <div class="empty-div"></div>
-          <!-- 搜索框 -->
-          <div class="search-box">
-            <img src="/images/search.png" alt="搜索" class="search-box-img">
-            <input class="search-box-input" type="text" placeholder="搜索宝贝" />
+    <template v-if="flag">
+      <div>
+        <div class="top">
+          <!-- 页面顶部刘海 -->
+          <div class="top-container">
+            <!-- logo -->
+            <a href="./index.html">
+              <img class="top-logo" src="/images/logo1.jpg">
+            </a>
+            <!-- 占位div -->
+            <div class="empty-div"></div>
+            <!-- 搜索框 -->
+            <div class="search-box">
+              <img src="/images/search.png" alt="搜索" class="search-box-img">
+              <input class="search-box-input" type="text" placeholder="搜索宝贝" />
+            </div>
+            <!-- 搜索框右边的东西 -->
+            <a type="button" class="btn btn-outline-dark top-right-btn1">按钮1</a>
+            <a type="button" class="btn btn-outline-dark top-right-btn2">按钮2</a>
           </div>
-          <!-- 搜索框右边的东西 -->
-          <a type="button" class="btn btn-outline-dark top-right-btn1">按钮1</a>
-          <a type="button" class="btn btn-outline-dark top-right-btn2">按钮2</a>
         </div>
-      </div>
-      <!-- 页面主体内容 -->
-      <div class="center-container-bgc">
-        <div class="center-container">
-          <!-- 主题上半部分 -->
-          <div class="center-container-top">
-            <!-- 主体内容上左半部分 -->
-            <div class="center-container-top-left">
-              <img class="center-container-top-img" :src="bigImg">
-              <ul class="center-container-top-ul">
-                <li v-for="goodImg in goodsImgs" :key="goodImg.id" @mouseover="showBigImg(goodImg.id)"><img
-                    :src="goodImg.img"></li>
-              </ul>
-            </div>
-            <!-- 主题内容上右半部分 -->
-            <div class="center-container-top-right">
-              <!-- 商品大标题 -->
-              <h1 class="center-container-top-title">
-                {{ goods.name }}
-              </h1>
-              <!-- 已售标签 -->
-              <div class="center-container-top-sold">
-                已售 {{ goods.sale }}+
+        <!-- 页面主体内容 -->
+        <div class="center-container-bgc">
+          <div class="center-container">
+            <!-- 主题上半部分 -->
+            <div class="center-container-top">
+              <!-- 主体内容上左半部分 -->
+              <div class="center-container-top-left">
+                <img class="center-container-top-img" :src="bigImg">
+                <ul class="center-container-top-ul">
+                  <li v-for="goodImg in goodsImgs" :key="goodImg.imgId" @mouseover="showBigImg(goodImg.imgId)">
+                    <img :src="goodImg.imageName">
+                  </li>
+                </ul>
               </div>
-              <!-- 商品价格 -->
-              <div class="center-container-top-price">
-                <span>¥</span>
-                <span>{{ goods.price }}</span>
-              </div>
-              <!-- 商品产地 -->
-              <div>
-                <span class="producer">产地: </span>
-                <a class="producerName">{{ goods.producer }}</a>
-              </div>
-              <!-- 商品信息 -->
-              <div class="goods-detail">{{ goods.detail }}</div>
-              <!-- 购买数量 -->
-              <div class="buy-count">
-                <span>数量：</span>
-                <div class="btn-group btn-group-sm btn-group-count" role="group" aria-label="Small button group">
-                  <button type="button" class="btn btn-outline-secondary"
-                    @click="count = count > 1 ? count - 1 : 1">-</button>
-                  <input type="text" class="form-control count-input" :value="count" @input="countChange">
-                  <button type="button" class="btn btn-outline-secondary"
-                    @click="count = count <99 ? count+1 : 99">+</button>
+              <!-- 主题内容上右半部分 -->
+              <div class="center-container-top-right">
+                <!-- 商品大标题 -->
+                <h1 class="center-container-top-title">
+                  {{ goods.name }}
+                </h1>
+                <!-- 已售标签 -->
+                <div class="center-container-top-sold">
+                  已售 {{ goods.salesVolume }}+
                 </div>
-              </div>
-              <!-- 立即购买和加入购物车按钮 -->
-              <div class="btn-group-div">
-                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                  <a type="button" class="btn btn-primary buy-button">立即购买</a>
-                  <a type="button" class="btn btn-success shopping-button">加入购物车</a>
+                <!-- 商品价格 -->
+                <div class="center-container-top-price">
+                  <span>¥</span>
+                  <span>{{ goods.price }}</span>
                 </div>
-              </div>
-            </div>
-          </div>
-          <hr>
-          <!-- 主题下半部分 -->
-          <div class="center-container-bottom">
-            <!-- 推荐部分 -->
-            <div class="recommend">
-              <div class="bottom-title">
-                <img src="/images/recommend.png" alt="recommend">
-                <div>猜你喜欢</div>
-              </div>
-              <!-- 推荐部分主体 -->
-              <div class="recommend-row" v-for="i in 2">
-                <a class="recommend-col" href="#" v-for="index in 5">
-                  <!-- 图片 -->
-                  <img :src="recommends[ (i-1) * 5 + index - 1 ].img" alt="效果图展示">
-                  <!-- title -->
-                  <div class="recommend-title">{{ recommends[ (i-1) * 5 + index - 1 ].title }}</div>
-                  <!-- 价格 -->
-                  <div class="price">
-                    <span>¥</span>
-                    <span>{{ recommends[ (i-1) * 5 + index - 1 ].price }}</span>
+                <!-- 商品产地 -->
+                <div>
+                  <span class="producer">产地: </span>
+                  <a class="producerName">{{ goods.producer }}</a>
+                </div>
+                <!-- 商品信息 -->
+                <div class="goods-detail">{{ goods.detail }}</div>
+                <!-- 购买数量 -->
+                <div class="buy-count">
+                  <span>数量：</span>
+                  <div class="btn-group btn-group-sm btn-group-count" role="group" aria-label="Small button group">
+                    <button type="button" class="btn btn-outline-secondary"
+                      @click="count = count > 1 ? count - 1 : 1">-</button>
+                    <input type="text" class="form-control count-input" :value="count" @input="countChange">
+                    <button type="button" class="btn btn-outline-secondary"
+                      @click="count = count <99 ? count+1 : 99">+</button>
                   </div>
-                </a>
+                </div>
+                <!-- 立即购买和加入购物车按钮 -->
+                <div class="btn-group-div">
+                  <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a type="button" class="btn btn-primary buy-button">立即购买</a>
+                    <a type="button" class="btn btn-success shopping-button">加入购物车</a>
+                  </div>
+                </div>
               </div>
             </div>
             <hr>
-            <!-- 评论部分 -->
-            <div class="comment">
-              <div class="bottom-title">
-                <img src="/images/list.png" alt="recommend">
-                <div>热门评论</div>
+            <!-- 主题下半部分 -->
+            <div class="center-container-bottom">
+              <!-- 推荐部分 -->
+              <div class="recommend">
+                <div class="bottom-title">
+                  <img src="/images/recommend.png" alt="recommend">
+                  <div>猜你喜欢</div>
+                </div>
+                <!-- 推荐部分主体 -->
+                <div class="recommend-row" v-for="i in 2">
+                  <a class="recommend-col" :href="'GoodDetails.html?id=' + recommends[ (i-1) * 5 + index - 1 ].id" v-for="index in 5">
+                    <!-- 图片 -->
+                    <img :src=" recommends[ (i-1) * 5 + index - 1 ].imageName" alt="效果图展示">
+                    <!-- title -->
+                    <div class="recommend-title">{{ recommends[ (i-1) * 5 + index - 1 ].name }}</div>
+                    <!-- 价格 -->
+                    <div class="price">
+                      <span>¥</span>
+                      
+                      <span>{{ recommends[ (i-1) * 5 + index - 1 ].price }}</span>
+                    </div>
+                  </a>
+                </div>
               </div>
-              <div class="comment-body">
-                <!-- 一条评论 -->
-                <div class="one-comment">
-                  <!-- 评论者头像 -->
-                  <div><img class="commentator-head" src="/images/my_comment.jpg" alt="user1"></div>
-                  <div class="comment-container">
-                    <!-- 评论内容 -->
-                    <div class="form-floating">
-                      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
-                      <label for="floatingTextarea2">Comments</label>
+              <hr>
+              <!-- 评论部分 -->
+              <div class="comment">
+                <div class="bottom-title">
+                  <img src="/images/list.png" alt="recommend">
+                  <div>热门评论</div>
+                </div>
+                <div class="comment-body">
+                  <!-- 一条评论 -->
+                  <div class="one-comment">
+                    <!-- 评论者头像 -->
+                    <div><img class="commentator-head" src="/images/my_comment.jpg" alt="user1"></div>
+                    <div class="comment-container">
+                      <!-- 评论内容 -->
+                      <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
+                        <label for="floatingTextarea2">Comments</label>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <!-- 评论主体 -->
-              <div class="comment-body">
-                <!-- 一条评论 -->
-                <div class="one-comment" v-for="comment in comments" :key="comment.id">
-                  <!-- 评论者头像 -->
-                  <div><img class="commentator-head" :src="comment.img" alt="user1"></div>
-                  <div class="comment-container">
-                    <!-- 评论者名称 -->
-                    <div class="commentator-name">{{ comment.name }}</div>
-                    <!-- 评论内容 -->
-                    <div class="comment-content">
-                      {{ comment.content }}
-                    </div>
-                    <!-- 评论尾部 -->
-                    <div class="comment-footer">
-                      <span class="comment-time">{{ comment.time }}</span>
-                      <span class="comment-likes" @click="likeComment(comment)">
-                        <img class="comment-likes-icon" :src="comment.liked?'/images/liked.png': '/images/like.png' " alt="点赞">
-                        <span :class="comment.liked?'comment-likes-num':''"> {{ comment.likes }} </span>
-                      </span>
+                <!-- 评论主体 -->
+                <div class="comment-body">
+                  <!-- 一条评论 -->
+                  <div class="one-comment" v-for="comment in comments" :key="comment.id">
+                    <!-- 评论者头像 -->
+                    <div><img class="commentator-head" :src="comment.img" alt="user1"></div>
+                    <div class="comment-container">
+                      <!-- 评论者名称 -->
+                      <div class="commentator-name">{{ comment.name }}</div>
+                      <!-- 评论内容 -->
+                      <div class="comment-content">
+                        {{ comment.content }}
+                      </div>
+                      <!-- 评论尾部 -->
+                      <div class="comment-footer">
+                        <span class="comment-time">{{ comment.time }}</span>
+                        <span class="comment-likes" @click="likeComment(comment)">
+                          <img class="comment-likes-icon" :src="comment.liked?'/images/liked.png': '/images/like.png' " alt="点赞">
+                          <span :class="comment.liked?'comment-likes-num':''"> {{ comment.likes }} </span>
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- 页面右侧固定内容 -->
-        <div class="right-fixed-div">
-          <!-- 购物车 -->
-          <div>
-            <img src="/images/shopping.png" alt="shopping">
-            <div> 购物车 </div>
-          </div>
-          <div>
-            <img src="/images/message.png" alt="message">
-            <div> 评论 </div>
-          </div>
-          <div @click="scrollToTop" v-if="showBackToTop">
-            <img src="/images/top.png" alt="top">
-            <div> 回顶部 </div>
+  
+          <!-- 页面右侧固定内容 -->
+          <div class="right-fixed-div">
+            <!-- 购物车 -->
+            <div>
+              <img src="/images/shopping.png" alt="shopping">
+              <div> 购物车 </div>
+            </div>
+            <div>
+              <img src="/images/message.png" alt="message">
+              <div> 评论 </div>
+            </div>
+            <div @click="scrollToTop" v-if="showBackToTop">
+              <img src="/images/top.png" alt="top">
+              <div> 回顶部 </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </template>
   </div>
   <script src="./utils/bootstrap.min.js"></script>
   <script src="./utils/axios.min.js"></script>

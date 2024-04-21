@@ -70,7 +70,7 @@
         <div class="container">
           <ul class="site-menu js-clone-nav d-none d-md-block">
             <li class="has-children">
-              <a>LANGUAGES</a>
+              <a>语言</a>
               <ul class="dropdown">
                 <div>
                   <a  href="index-Chinese.html"><img src="./images/china.png" alt="Image">Chinese</a>
@@ -101,6 +101,7 @@
             <!--            </li>-->
             <li style="cursor: pointer;" v-for="(item, index) in indexBanner" :key="item.country" v-if="index !== 0" :class="country === item.country ? 'active':''">
               <a @click="country = item.country">{{ item.name }}</a>
+<!--              <a @click="country = item.country">{{ item.name1 }}</a>-->
             </li>
             <!--            <li><a href="contact.html">Contact</a></li>-->
           </ul>
@@ -116,7 +117,7 @@
         </a>
       </div>
       <ul class="slick-dots">
-        <li v-for="i in 2"><label></label></li>
+        <li v-for="i in 3"><label></label></li>
       </ul>
     </div>
 
@@ -128,11 +129,12 @@
           <img :src="indexBanner[country].flag" class="img-fluid">
         </div>
         <div class="col-md-5 col-sm-7" :class="!country ? 'col-xl-3': ''">
-          <h1 class="mb-2" style="padding-bottom: 50px">{{ indexBanner[country].name }} <br> {{ indexBanner[country].chineseName }}</h1>
+          <h1 class="mb-2" style="padding-bottom: 50px">{{ indexBanner[country].name }} <br> {{ indexBanner[country].name1 }}</h1>
           <div class="intro-text text-center text-md-left">
             <p class="mb-xl-4">{{ indexBanner[country].text }} </p>
             <p>
-              <a href="#" class="btn btn-sm btn-primary">Shop Now</a>
+              <a href="#" class="btn btn-sm btn-primary"> 立刻选购
+</a>
             </p>
           </div>
         </div>
@@ -140,39 +142,80 @@
     </div>
 
 
+
+
+<!--    <div class="site-section site-section-sm site-blocks-1">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="">-->
+<!--            <div class="icon mr-4 align-self-start">-->
+<!--              <span class="icon-truck"></span>-->
+<!--            </div>-->
+<!--            <div class="text">-->
+<!--              <h2 class="text-uppercase">Free Shipping</h2>-->
+<!--              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan-->
+<!--                tincidunt fringilla.</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="100">-->
+<!--            <div class="icon mr-4 align-self-start">-->
+<!--              <span class="icon-refresh2"></span>-->
+<!--            </div>-->
+<!--            <div class="text">-->
+<!--              <h2 class="text-uppercase">Free Returns</h2>-->
+<!--              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan-->
+<!--                tincidunt fringilla.</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="200">-->
+<!--            <div class="icon mr-4 align-self-start">-->
+<!--              <span class="icon-help"></span>-->
+<!--            </div>-->
+<!--            <div class="text">-->
+<!--              <h2 class="text-uppercase">Customer Support</h2>-->
+<!--              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan-->
+<!--                tincidunt fringilla.</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
     <div class="site-section site-blocks-2">
       <div class="container">
         <div class="row">
           <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
             <a class="block-2-item" href="/goodDetails.html?id=77">
               <figure class="image">
-                <img src="uploads/img/5c198778-c3fc-47f8-80ee-f1a6b870dbe4.jpg" alt="" class="img-fluid">
+                <img src="images/goods/棉麻端倪徐衬衫.jpg" alt="" class="img-fluid">
               </figure>
               <div class="text">
 <!--                 
 -->
-                <h3>Clothes</h3>
+                <h3> 服饰
+</h3>
               </div>
             </a>
           </div>
           <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
             <a class="block-2-item" href="/goodDetails.html?id=60">
               <figure class="image">
-                <img src="uploads/img/6ed8db61-a7b5-4fd9-a81e-84e0e8da6685.jpg" alt="" class="img-fluid">
+                <img src="images/goods/壁挂厨卫垃圾桶.jpg" alt="" class="img-fluid">
               </figure>
               <div class="text">
-                <h3>Daily Necessities</h3>
+
+                <h3>日用百货</h3>
               </div>
             </a>
           </div>
           <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
             <a class="block-2-item" href="/goodDetails.html?id=83">
               <figure class="image">
-                <img src="uploads/img/fb26974d-2e3a-47cc-bd6c-524abc9fc1b9.jpg" alt="" class="img-fluid">
+                <img src="images/goods/破壁机.jpg" alt="" class="img-fluid">
               </figure>
               <div class="text">
 
-                <h3>Household Appliances</h3>
+                <h3>家用电器</h3>
               </div>
             </a>
           </div>
@@ -184,7 +227,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-7 site-section-heading text-center pt-4">
-            <h2>Featured Products</h2>
+            <h2>热销商品</h2>
           </div>
         </div>
         <div class="row">
@@ -196,7 +239,7 @@
                     <img src="images/goods/女士提包.jpg" alt="Image placeholder" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="/goodDetails.html?id=61">Lady Bag</a></h3>
+                    <h3><a href="/goodDetails.html?id=61">女士提包</a></h3>
 <!--                    <p class="mb-0">Finding perfect t-shirt</p>-->
                     <p class="text-primary font-weight-bold">CNY148</p>
                   </div>
@@ -208,7 +251,7 @@
                     <img src="images/goods/刨丝器.jpg" alt="Image placeholder" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="/goodDetails.html?id=67">Grater</a></h3>
+                    <h3><a href="/goodDetails.html?id=67">刨丝器</a></h3>
 <!--                    <p class="mb-0">Finding perfect products</p>-->
                     <p class="text-primary font-weight-bold">CNY88</p>
                   </div>
@@ -220,7 +263,7 @@
                     <img src="images/goods/便携式榨汁机.jpg" alt="Image placeholder" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="/goodDetails.html?id=82">Portable Juicer</a></h3>
+                    <h3><a href="/goodDetails.html?id=82">便携式榨汁机</a></h3>
 <!--                    <p class="mb-0">Finding perfect products</p>-->
                     <p class="text-primary font-weight-bold">CNY128</p>
                   </div>
@@ -232,7 +275,7 @@
                     <img src="images/goods/mini缝纫机.jpg" alt="Image placeholder" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="/goodDetails.html?id=84" style="font-size: 18px">Mini Sewing Machine</a></h3>
+                    <h3><a href="/goodDetails.html?id=84" >Mini缝纫机</a></h3>
 <!--                    <p class="mb-0">Finding perfect products</p>-->
                     <p class="text-primary font-weight-bold">CNY178</p>
                   </div>
@@ -244,7 +287,7 @@
                     <img src="images/goods/罗马凉鞋.jpg" alt="Image placeholder" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="/goodDetails.html?id=56">Sandal</a></h3>
+                    <h3><a href="/goodDetails.html?id=56">罗马凉鞋</a></h3>
 <!--                    <p class="mb-0">Finding perfect products</p>-->
                     <p class="text-primary font-weight-bold">CNY88</p>
                   </div>
@@ -260,21 +303,22 @@
       <div class="container">
         <div class="row justify-content-center  mb-5">
           <div class="col-md-7 site-section-heading text-center pt-4">
-            <h2>Big Sale!</h2>
+            <h2>特价商品!</h2>
           </div>
         </div>
-        <div class="row align-items-center" style="text-decoration: none">
+        <div class="row align-items-center">
           <div class="col-md-12 col-lg-7 mb-5">
             <a href="#"><img src="images/blog_1.jpg" alt="Image placeholder" class="img-fluid rounded"></a>
           </div>
           <div class="col-md-12 col-lg-5 text-center pl-md-5">
-            <h2><a href="#">50% less in all items</a></h2>
+            <h2><a href="#">全场惊爆5折起！</a></h2>
 <!--            <p class="post-meta mb-4">By <a href="#">Carl Smith</a> <span class="block-8-sep">&bullet;</span> September-->
 <!--              3,-->
 <!--              2018</p>-->
 <!--            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam iste dolor accusantium facere corporis-->
 <!--              ipsum animi deleniti fugiat. Ex, veniam?</p>-->
-            <p><a href="#" class="btn btn-primary btn-sm">Shop Now</a></p>
+            <p><a href="#" class="btn btn-primary btn-sm"> 立刻探索
+</a></p>
           </div>
         </div>
       </div>
@@ -286,45 +330,45 @@
           <div class="col-lg-6 mb-5 mb-lg-0">
             <div class="row">
               <div class="col-md-12">
-                <h3 class="footer-heading mb-4">Navigations</h3>
+                <h3 class="footer-heading mb-4">导航</h3>
               </div>
               <div class="col-md-6 col-lg-4">
                 <ul class="list-unstyled">
-                  <li><a href="#">Sell online</a></li>
-                  <li><a href="#">Features</a></li>
-                  <li><a href="#">Shopping cart</a></li>
-                  <li><a href="#">Store builder</a></li>
+                  <li><a href="#">在线售卖</a></li>
+                  <li><a href="#">特征</a></li>
+                  <li><a href="#">购物车</a></li>
+                  <li><a href="#">商店建设者</a></li>
                 </ul>
               </div>
               <div class="col-md-6 col-lg-4">
                 <ul class="list-unstyled">
-                  <li><a href="#">Mobile commerce</a></li>
-                  <li><a href="#">Dropshipping</a></li>
-                  <li><a href="#">Website development</a></li>
+                  <li><a href="#">移动商务</a></li>
+                  <li><a href="#">直销</a></li>
+                  <li><a href="#">网站开发</a></li>
                 </ul>
               </div>
               <div class="col-md-6 col-lg-4">
                 <ul class="list-unstyled">
-                  <li><a href="#">Point of sale</a></li>
-                  <li><a href="#">Hardware</a></li>
-                  <li><a href="#">Software</a></li>
+                  <li><a href="#">销售点</a></li>
+                  <li><a href="#">硬件</a></li>
+                  <li><a href="#">软件</a></li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-            <h3 class="footer-heading mb-4">Promo</h3>
+            <h3 class="footer-heading mb-4">促销</h3>
             <a href="#" class="block-6">
               <img src="images/logo1.png" alt="Image placeholder" class="img-fluid rounded mb-4" style="max-width: 50%">
-              <h3 class="font-weight-light  mb-0">Finding Your Perfect Shoes</h3>
-              <p>Promo from </p>
+              <h3 class="font-weight-light  mb-0">寻找你的最爱商品</h3>
+              <p>促销起始</p>
             </a>
           </div>
           <div class="col-md-6 col-lg-3">
             <div class="block-5 mb-5">
-              <h3 class="footer-heading mb-4">Contact Info</h3>
+              <h3 class="footer-heading mb-4">联系信息</h3>
               <ul class="list-unstyled">
-                <li class="address">Shanghai 123 Oriental Beauty Valley Avenue</li>
+                <li class="address">上海市奉贤区东方美谷大道123号</li>
                 <li class="phone"><a href="tel://23923929210">+225 0706015854</a></li>
                 <li class="email">rizaocotedivoire@gmail.com</li>
               </ul>
@@ -332,10 +376,10 @@
 
             <div class="block-7">
               <form action="#" method="post">
-                <label for="email_subscribe" class="footer-heading">Subscribe</label>
+                <label for="email_subscribe" class="footer-heading">关注我们</label>
                 <div class="form-group">
-                  <input type="text" class="form-control py-4" id="email_subscribe" placeholder="Email">
-                  <input type="submit" class="btn btn-sm btn-primary" value="Send">
+                  <input type="text" class="form-control py-4" id="email_subscribe" placeholder="邮箱">
+                  <input type="submit" class="btn btn-sm btn-primary" value="发送">
                 </div>
               </form>
             </div>
@@ -356,8 +400,8 @@
 
 
     <!-- 右上方固定图标“联系我们” -->
-    <a class="fixed-contact" style="text-align: center;font-weight:bold" href="contact.html">
-      Contact<br>US
+    <a class="fixed-contact" style="text-align: center;font-weight:bold;" href="contact.html">
+      联系<br>我们
     </a>
 
   </div>
@@ -371,7 +415,8 @@
   <script src="js/jquery.magnific-popup.min.js"></script>
   <script src="js/aos.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/index.js"></script>
+  <script src="js/index-Chinese.js"></script>
+
 
 </body>
 

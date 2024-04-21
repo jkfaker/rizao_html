@@ -72,10 +72,11 @@ const app = new Vue({
         indexBanner: [
             {
                 country: 0,
-                flag: "./images/首页中心2.png" ,
+                flag: "./images/首页中心2.png",
                 title: "Finding Your Perfect Things",
-                name: "Finding Your Perfect Things",
-                text: "",
+                name: "Explorez la culture africaine ",
+                name1: "Découvrez des produits intéressants",
+                // text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.",
                 banner: [
                     {
                         id: 1,
@@ -97,12 +98,11 @@ const app = new Vue({
             },
             {
                 country: 1,
-                name: "China",
+                name: "La Chine",
                 flag: "./images/chinaFlag.jpg",
                 title: "这是A国的标题",
-                // chineseName: 'China',
-                text: "Chinese culture is characterized by its profound historical depth, vastness, and dazzling diversity. Serving as the cultural progenitor within the East Asian cultural sphere, it occupies a significant position within the global system of cultures. Due to variations in geographical locations and natural conditions across the land, distinctive regional features have emerged in both humanistic and economic aspects.\n" +
-                    "Traditional forms of art and literature include poetry, operatic drama, calligraphy, and ink wash painting. Notable among China's major traditional festivals are the Spring Festival, Lantern Festival, Tomb-Sweeping Day, Dragon Boat Festival, Mid-Autumn Festival, and Double Ninth Festival.",
+                // chineseName: '中国',
+                text: "La Chine a une longue histoire, large et profonde, splendide et colorée, est la suzeraineté culturelle du cercle culturel de l’Asie de l’Est, occupe une position importante dans le système culturel mondial, en raison de la situation géographique et des conditions naturelles de différents endroits, les sciences humaines et les aspects économiques ont également leurs propres caractéristiques. Les formes d’art culturel traditionnelles comprennent la poésie, l’opéra, la calligraphie, la peinture chinoise, etc., tandis que la fête du printemps, la fête des lanternes, la fête de Qingming, la fête des bateaux-dragons, la fête de la mi-automne, la fête de Chongyang, etc. sont des festivals traditionnels importants en Chine.",
                 banner: [
                     {
                         id: 1,
@@ -128,8 +128,7 @@ const app = new Vue({
                 // chineseName: '科特迪瓦',
                 flag: "./images/keteFlag.jpg",
                 title: "这是B国的标题",
-                text: "\n" +
-                    "Cote d'Ivoire means \"Cote d'Ivoire\" in French, and at the request of the government, the People's Republic of China is called Cote d'Ivoire. The United Nations has been using this name since December 31, 1985. It is a country in West Africa, adjacent to Ghana, Liberia, Guinea, Mali, and Burkina Faso. The capital city of Yamoussoukro has a coastline of about 500 kilometers, an area of 322463 square kilometers, and a population of 27 million (2022). The country has 69 ethnic groups, divided into four main ethnic groups: Aken about 42%, Mandi about 27%, Volta about 16%, and Kru about 15%.",
+                text: "La Côte d'Ivoire signifie « Côte d'Ivoire » en français et, à la demande du Gouvernement, la République populaire de Chine s'appelle Côte d'Ivoire. L'ONU utilise ce nom depuis le 31 décembre 1985. Est un pays d'Afrique de l'Ouest, adjacent au Ghana, au Libéria, à la Guinée, au Mali et au Burkina Faso. Avec un littoral d’environ 500 km de long et une superficie de 322 463 km2, Yamoussoukro, la capitale, une population de 27 millions d’habitants (2022), le pays compte 69 ethnies réparties en 4 grandes familles ethniques: Akon avec environ 42%, Mandi avec environ 27%, Volta avec environ 16% et Kru avec environ 15%.",
                 banner: [
                     {
                         id: 1,
@@ -143,16 +142,19 @@ const app = new Vue({
                         id: 3,
                         img: "./images/keteScenery_3.jpg",
                     },
-
+                    {
+                        id: 4,
+                        img: "./images/keteScenery_4.jpg",
+                    },
                 ],
             },
             {
                 country: 3,
-                name: "Niger",
+                name: "Le Niger",
                 // chineseName: '尼日尔',
                 flag: "./images/nigerFlag.jpg",
                 title: "这是C国的标题",
-                text: "The country is located in central western Africa, abbreviated as Niger, and is a landlocked country on the southern edge of the Sahara Desert. It borders Algeria and Libya to the north, Nigeria and Benin to the south, Mali and Burkina Faso to the west, and Chad to the east. It covers an area of 1267000 square kilometers and has a population of 27.07 million (as of 2023). The country has five main ethnic groups: Hausa, Jelmasanghai, Fulani, Tuareg, and Kanuri, The capital city of Niamey is divided into 7 regions and 1 regional city",
+                text: "Situé dans le Centre - ouest de l'Afrique, ou simplement Niger, est un pays enclavé à la limite sud du désert du Sahara, le pays est bordé au nord par l'Algérie et la Libye, au Sud par le Nigeria et le Bénin, à l'Ouest par le Mali et le Burkina Faso et à l'est par Le Tchad, a une superficie de 1 267 000 km2, une population de 27,07 millions d'habitants (2023), le pays compte 5 groupes ethniques principaux: les Haoussas, les zherma sanhai, les Peuls, les Touaregs et les Kanouri, la capitale Niamey, le pays est divisé en 7 régions, 1 municipalité régionale",
                 banner: [
                     {
                         id: 1,
@@ -166,15 +168,19 @@ const app = new Vue({
                         id: 3,
                         img: "./images/niger-3.jpg",
                     },
+                    {
+                        id: 4,
+                        img: "./images/niger-4.jpg",
+                    },
                 ],
             },
             {
                 country: 4,
-                name: "Nigeria",
+                name: "Le Nigeria",
                 // chineseName: '尼日利亚',
                 flag: "./images/nigeriaFlag.jpg",
                 title: "这是D国的标题",
-                text: "Nigeria is located in 6 ° 27'N, 3 ° 24'E, a country in southeastern West Africa, at the peak of the west coast of the Gulf of Guinea in Africa. Neighboring countries include Benin to the west and Niger to the north, it borders Chad across Lake Chad to the northeast, Cameroon to the east and southeast, and the Gulf of Guinea in the Atlantic Ocean to the south. The country covers an area of 923768 square kilometers, has a population of 227 million (as of 2024), and has over 250 ethnic groups. The capital is Abuja, and the country is divided into one federal capital area and 36 states.\n",
+                text: "Situé par 6°27′ N, 3°24′ e, pays du Sud - est de l’afrique de l’ouest, point culminant de la Rive occidentale du Golfe de Guinée en Afrique, pays voisin dont le Bénin à l’ouest, le Niger au Nord, une petite frontière avec le Tchad au nord - est par le lac Tchad, contigu au Cameroun à l’est et au Sud - Est et bordé par le golfe de Guinée Atlantique au Sud, le Nigeria a une superficie de 923 768 km2, une population de 227 millions d’habitants (2024), plus de 250 groupes ethniques, la capitale Abuja, le pays est divisé en 1 District fédéral de la capitale, 36 États.",
                 banner: [
                     {
                         id: 1,
@@ -187,6 +193,10 @@ const app = new Vue({
                     {
                         id: 3,
                         img: "./images/nigeria-3.jpg",
+                    },
+                    {
+                        id: 4,
+                        img: "./images/nigeria-4.jpg",
                     },
                 ],
             },
