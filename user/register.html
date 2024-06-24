@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>案例_登录_提示消息</title>
+  <link rel="stylesheet" href="../utils/bootstrap.min.css" />
+  <link rel="stylesheet" href="./css/login.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h3>欢迎-注册</h3>
+    <!-- 登录结果-提示框 -->
+    <div class="alert alert-success" role="alert">提示消息</div>
+    <!-- 表单 -->
+    <div class="form_wrap">
+      <form>
+        <div class="mb-3">
+          <label for="username" class="form-label">手机号</label>
+          <input type="text" class="form-control username" />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">密码</label>
+          <input type="password" class="form-control password" />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">确认密码</label>
+          <input type="password" class="form-control password-true" />
+        </div>
+        <div class="mb-3" >
+          <label for="code" class="form-label">验证码</label>
+          <div class=" row ">
+            <div class="col-8 ">
+            <input type="text" class="form-control code" /> 
+          </div>          
+            <button type="button" class="col-4 btn btn-primary btn-verify">发送验证码</button>
+          </div>
+        </div>
+        <div style="padding-bottom: 10px;">
+          <input type="checkbox" class="agree-user">
+          <span class="form-text">我已阅读并同意<a href="./user.html">《用户协议》</a></span>
+        </div>
+        <button type="button" class="btn btn-primary btn-login pass-button-full-disabled" disabled>注 册</button>
+      </form>
+    </div>
+
+  </div>
+  <script src="../utils/axios.min.js"></script>
+  <script>
+    // 目标1：点击登录时，用户名和密码长度判断，并提交数据和服务器通信
+    // 目标2：使用提示框，反馈提示消息
+    // 2.1 获取提示框
+    const myAlert = document.querySelector(".alert");
+    /**
+     * 2.2 封装提示框函数，重复调用，满足提示需求
+     * 功能：
+     * 1. 显示提示框
+     * 2. 不同提示文字msg，和成功绿色失败红色isSuccess（true成功，false失败）
+     * 3. 过2秒后，让提示框自动消失
+     */
+    function alertFn(msg, isSuccess) {
+      // 1> 显示提示框
+      myAlert.classList.add("show");
+
+      // 2> 实现细节
+      myAlert.innerText = msg;
+      const bgStyle = isSuccess ? "alert-success" : "alert-danger";
+      myAlert.classList.add(bgStyle);
+
+      // 3> 过2秒隐藏
+      setTimeout(() => {
+        myAlert.classList.remove("show");
+        // 提示：避免类名冲突，重置背景色
+        myAlert.classList.remove(bgStyle);
+      }, 2000);
+    }
+
+    // 验证码 
+    let verify = document.querySelector(".btn-verify");
+    verify.addEventListener("click", () => {
+            // 1.2 获取用户名和密码
+      const username = document.querySelector(".username").value;
+      console.log(username);
+      axios({
+        url: "/api/sms/Request/" + username.toString(),
+        method: "POST",
+
+      })
+        .then((result) => {
+          alertFn(result.data.msg, true);
+      })
+      verify.disabled = true;
+    })
+
+    // 登录-点击事件
+    let btnLogin = document.querySelector(".btn-login");
+    const agreeUser = document.querySelector(".agree-user");
+
+    agreeUser.addEventListener("change", () => {
+      if (agreeUser.checked) {
+        btnLogin.disabled = false;
+        btnLogin.classList.remove("pass-button-full-disabled");
+      } else {
+        btnLogin.disabled = true;
+        btnLogin.classList.add("pass-button-full-disabled");
+      }
+    })
+    btnLogin.addEventListener("click", () => {
+      const username = document.querySelector(".username").value;
+      const code = document.querySelector(".code").value;
+      const password = document.querySelector(".password").value;
+      const passwordTrue = document.querySelector(".password-true").value;
+      console.log(username, password, passwordTrue)
+      if (btnLogin.disabled)
+        return;
+
+      if (password !== passwordTrue) {
+        alertFn("两次密码不一致", false);
+        console.log("两次密码不一致");
+        return; // 阻止代码继续执行
+      }
+      // 1.3 判断长度
+      if (username.length < 8) {
+        alertFn("用户名必须大于等于8位", false);
+        console.log("用户名必须大于等于8位");
+        return; // 阻止代码继续执行
+      }
+      if (password.length < 6) {
+        alertFn("密码必须大于等于6位", false);
+        console.log("密码必须大于等于6位");
+        return; // 阻止代码继续执行
+      }
+
+      // 1.4 基于axios提交用户名和密码
+      // console.log('提交数据到服务器')
+      axios({
+        url: "/api/userRegister1",
+        method: "POST",
+        data: {
+          username,
+          phone: username,
+          password,
+          code,
+        },
+      })
+        .then((result) => {
+          alertFn("注册成功，系统将在三秒钟后跳转", true);
+          setTimeout(() => {
+            window.location.href = "./login.html";
+          }, 2000);
+          console.log(result);
+          console.log(result.data.msg);
+        })
+        .catch((error) => {
+          alertFn(error.response.data.msg, false);
+          console.log(error);
+          console.log(error.response.data.msg);
+        });
+    });
+  </script>
+</body>
+
+</html>
