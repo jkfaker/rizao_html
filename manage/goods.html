@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="../utils/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  td {
+    min-width: 100px;
+    min-height: 100px;
+  }
+</style>
+
+<body>
+  <div class="container-fluid" id="app">
+    <div class="row">
+
+      <!-- 侧边栏 -->
+      <!-- <div class="col-md-2 bg-dark text-light text-center" style="position: relative; height: 100%; overflow-y: auto;">
+        <ul class="list-unstyled fw-normal pb-5 pt-5 pl-5">
+          <li @click="index = 1" style="cursor: pointer;" class="pb-2">商品列表</li>
+          <li @click="index = 2" style="cursor: pointer;" class="pb-2">添加商品</li>
+          <li @click="index = 3" style="cursor: pointer;" class="pb-2">评论列表</li>
+          <li @click="index = 4" style="cursor: pointer;" class="pb-2">管理员列表</li>
+        </ul>
+      </div> -->
+      <!-- <div class="col-md-10"> -->
+      <!-- 顶部导航栏 -->
+      <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#" @click="index = 1">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" @click="index = 1" :class="index === 1?'active' : ''" aria-current="page"
+                href="#">商品列表</a>
+              <a class="nav-link" @click="index = 2" :class="index === 2 || index === 6 ? 'active' : ''" href="#">添加商品</a>
+              <a class="nav-link" @click="index = 3" :class="index === 3?'active' : ''" href="#">评论列表</a>
+              <a class="nav-link" @click="index = 4" :class="index === 4?'active' : ''" href="#">管理员列表</a>
+              <a class="nav-link" @click="index = 5" :class="index === 5?'active' : ''" href="#">后台日志</a>
+            </div>
+          </div>
+          <!-- 查询 -->
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+      <!-- 商品列表界面--index = 1 -------------------------------------------------------------------------------->
+      <div style="width: 2000px;" v-if="index === 1">
+        <div>
+          <table class="table" align="center">
+            <thead>
+              <tr>
+                <th scope="col">商品id</th>
+                <th scope="col">大标题</th>
+                <th scope="col">销量</th>
+                <th scope="col">价格</th>
+                <th scope="col">介绍</th>
+                <th scope="col">产地</th>
+                <th scope="col">类别</th>
+                <th scope="col">图片1</th>
+                <th scope="col">图片2</th>
+                <th scope="col">图片3</th>
+                <th scope="col">图片4</th>
+                <th scope="col">图片5</th>
+                <th scope="col">图片6</th>
+                <th scope="col">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in list" :key="item.id">
+                <td v-for="value in item"> {{ value }} </td>
+                <td v-for="i in 6">
+                  <!-- <img v-if="imgPath = picOrUpload(item.id, i)" :src="imgPath"> -->
+                  <img v-if="picOrUpload(item.id, i)" :src="picOrUpload(item.id, i)">
+                  <input type="file" v-if="(!picOrUpload(item.id, i))" class="form-control uploadImg"
+                    @change="uploadImg(i, item.id, $event)">
+                </td>
+                <td>
+                  <button class="btn btn-primary" @click="getTextById(item.id)">编辑</button>
+                  <button class="btn btn-danger" @click="deleteById(item.id)">删除</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- 添加商品界面--index = 2 -------------------------------------------------------------------------------->
+      <div class="container offset-1 mt-5" v-if="index === 2 || index === 6">
+        <div class="row">
+          <div class="col-3">
+            <div class="mb-3">
+              <label for="staticEmail" class="col-form-label">id</label>
+              <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example"
+                disabled>
+            </div>
+            <div class="mb-3">
+              <label for="staticEmail" class="col-form-label">大标题</label>
+              <input class="form-control form-control-lg" type="text" placeholder="大标题" v-model="goods.name"
+                aria-label=".form-control-lg example">
+            </div>
+            <div class="mb-3">
+              <label for="staticEmail" class="col-form-label">价格</label>
+              <input class="form-control form-control-lg" type="text" placeholder="元" v-model="goods.price"
+                aria-label=".form-control-lg example">
+            </div>
+            <div class="mb-3">
+              <label for="staticEmail" class="col-form-label">产地</label>
+              <input class="form-control form-control-lg" type="text" placeholder="中国 北京" v-model="goods.producer"
+                aria-label=".form-control-lg example">
+            </div>
+            <div class="mb-3">
+              <label for="staticEmail" class="col-form-label">类别</label>
+              <input class="form-control form-control-lg" type="text" placeholder="家用品"
+                aria-label=".form-control-lg example" v-model="goods.classification">
+            </div>
+          </div>
+          <div class="col-1">
+            <div style="border-left: 1px solid gray;height: 100%; position: relative;"></div>
+          </div>
+          <div class="col-6 text-left">
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">商品详细介绍</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                v-model="goods.detail"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="index = 1">取消</button>
+            <button type="button" class="btn btn-primary" @click="index === 2 ? addText() : editText()"
+              data-bs-dismiss="modal">确认</button>
+            <button v-if="index === 2" type="button" class="btn btn-primary" data-bs-toggle="modal"
+              data-bs-target="#attention">批量上传</button>
+          </div>
+        </div>
+        <!-- modal attention ---------------------------------------------------------------------------------- -->
+        <div class="modal fade" id="attention" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="attentionLabel" aria-hidden="true" style="--bs-modal-width: 1000px;">
+          <div class="modal-dialog">
+            <div class="modal-content pb-5">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="attentionLabel">批量商品上传</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <h3>注意Attention:</h3>
+                <h4 style="color: red;">1,文件需要表头，必须且包含以下五项数据，否则将报错！！！</h4>
+                <div><img src="../images/FileImportUpload2.png" style="width: 500px;"></div>
+                <h4 style="color: red;">2,请上传CSV文件！excel导出方式如下:</h4>
+                <div>
+                  <img src="../images/FileImportUpload1.png" style="height: 600px; width: 960px;">
+                </div>
+
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">我点错了</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#FileImportGoods">我知道了</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal FileImportGoods ---------------------------------------------------------------- ------->
+        <div class="modal fade" id="FileImportGoods" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="FileImportGoodsLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content pb-5">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="FileImportGoodsLabel">上传csv文件</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <input type="file" class="form-control uploadImg" @change="saveFile" accept=".csv">
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="uploadFile">确认</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 评论列表界面--index = 3 -------------------------------------------------------------------------------->
+
+      <!-- 管理员管理界面--index = 4 -------------------------------------------------------------------------------->
+      <div style="width: 2000px;" v-if="index === 4">
+        <div>
+          <table class="table" align="center">
+            <thead>
+              <tr>
+                <th scope="col">管理员id</th>
+                <th scope="col">昵称</th>
+                <th scope="col">管理员用户名</th>
+                <th scope="col">密码</th>
+                <th scope="col">手机号</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in adminList" :key="item.id">
+                <td v-for="value in item"> {{ value }} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- 后台日志界面--index = 5 -------------------------------------------------------------------------------->
+      <div style="width: 2000px;" v-if="index === 5">
+        <div>
+          <table class="table" align="center">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">操作员</th>
+                <th scope="col">操作时间</th>
+                <th scope="col">执行类名</th>
+                <th scope="col">执行方法名</th>
+                <th scope="col">方法实参</th>
+                <th scope="col">返回值</th>
+                <th scope="col">执行总耗时</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in logsList" :key="item.id">
+                <td v-for="value in item"> {{ value }} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="../utils/bootstrap.min.js"></script>
+  <script src="../utils/axios.min.js"></script>
+  <script src="../utils/vue.js"></script>
+  <!-- <script src="../js/checkLogin.js"></script> -->
+  <script src="../js/request.js"></script>
+  <script>
+    const URL = '/api/manage/';  // linux后端地址
+    // const URL = 'http://localhost:8080/manage/';  // windows后端地址
+    const app = new Vue({
+      el: '#app',
+      data: {
+        index: 1, // index = 2为新增商品界面，index = 5 为编辑商品界面
+        img: '',
+        imgId: '',
+        list: [],
+        imgList: [],
+        logsList: [], // 装有所有日志的列表
+        adminList: [],
+        goods: {
+          id: '',
+          price: '',
+          producer: '',
+          name: '',
+          classification: '',
+          detail: '',
+        },
+        // 文件批量上传商品
+        file1: '',
+      },
+      // 监听index的值，去后端请求相应的数据
+      watch: {
+        index(newValue) {
+          // 当回到首页时，初始化其他无用的数值
+          if (newValue === 1) {
+            this.goods = {};
+            this.file1 = '';
+            this.getAll();
+            this.getAllImg();
+          }
+          // 向后端获取管理员列表
+          if (newValue === 4) {
+            this.getAdmin();
+          }
+          // 向后端获取日志列表
+          if (newValue === 5) {
+            this.getLogs();
+          }
+        }
+      },
+      mounted: function () {
+        this.getAll();
+        this.getAllImg();
+      },
+      methods: {
+        // 页面刚开始加载时获取所有商品信息
+        getAll() {
+          axios({
+            url: URL + "goods",
+          }).then(result => {
+            this.list = result.data;
+            console.log(this.list);
+          })
+        },
+        // 页面开始加载时获取所有图片信息
+        getAllImg() {
+          axios({
+            url: URL + "img",
+          }).then(result => {
+            this.imgList = result.data;
+            console.log(this.imgList);
+          })
+        },
+        // 获取指定id商品信息
+        getTextById(id) {
+          this.index = 6;
+          axios({
+            url: URL + "goods",
+            params: {
+              id: id
+            },
+          }).then(result => {
+            this.goods = result.data[0];
+            console.log(this.goods);
+          })
+        },
+        // 添加非图片数据
+        addText() {
+          axios({
+            url: URL + "goods",
+            method: "POST",
+            data: this.goods
+          }).then(() => {
+            for (let key in this.goods) {
+              this.goods[key] = null;
+            }
+            this.getAll();
+          })
+        },
+
+        // 数据中的删除按钮
+        deleteById(id) {
+          axios({
+            url: URL + "goods/" + id,
+            method: "DELETE"
+          }).then(() => {
+            this.getAll();
+            this.getAllImg();
+          })
+        },
+
+        // 图片 or 上传？
+        picOrUpload(goodsId, imgId) {
+          // 文件相对路径
+          const Path = "../uploads/img/"
+          // 查找goodsId和imgId都符合条件的图片
+          const imgObj = this.imgList.find(item => item.goodsId === goodsId && item.imgId === imgId);
+          // console.log("imageName: "+ imgObj.imageName);
+          return imgObj ? (Path + imgObj.imageName) : null;
+        },
+
+        // 上传单个图片
+        uploadImg(imgId, goodsId, event) {
+          console.log(event.target.files[0]);
+          const fd = new FormData();
+          fd.append('imgId', imgId);
+          fd.append('goodsId', goodsId);
+          fd.append('img', event.target.files[0]);
+          axios({
+            url: URL + "img",
+            method: "POST",
+            data: fd
+          }).then(result => {
+            this.getAllImg();
+          })
+        },
+
+        // 单条商品信息编辑
+        editText() {
+          axios({
+            url: URL + "goods/" + this.goods.id,
+            method: "PUT",
+            data: this.goods,
+          }).then(result => {
+            console.log(result);
+            this.index = 1;
+          })
+        },
+        // 批量添加商品信息上传csv文件
+        saveFile(event) {
+          this.file1 = event.target.files[0];
+        },
+        uploadFile(event) {
+          // console.log(event.target);
+          const that = this;
+          if (this.file1) {
+            const fd = new FormData();
+            fd.append('file', this.file1);
+            axios({
+              url: URL + "file",
+              method: "POST",
+              data: fd
+            }).then(result => {
+              console.log(result.msg);
+              alert(result.msg);
+              that.index = 1;
+            })
+          } else {
+            alert("请先选择文件");
+          }
+        },
+        // 获取日志列表
+        getLogs() {
+          axios({
+            url: URL + "logs",
+          }).then(result => {
+            this.logsList = result.data;
+            console.log(result.data);
+          })
+        },
+        // 获取管理员列表
+        getAdmin() {
+          axios({
+            url: URL + "admin",
+          }).then(result => {
+            this.adminList = result.data;
+            console.log(result.data);
+          })
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

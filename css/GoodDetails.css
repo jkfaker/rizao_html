@@ -1,0 +1,424 @@
+
+/* 顶部刘海 */
+.top {
+  /* background-color: red; */
+}
+
+.top-container {
+  width: 1344px;
+  margin: 0 auto;
+  /* background-color: black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* logo */
+.top-logo {
+  height: 60px;
+  align-self: flex-start;
+  /* display: block; */
+  /* float: left; */
+}
+
+/* 占位div */
+.empty-div{
+  flex: 1;
+  
+}
+
+/* 搜索框 */
+.search-box {
+  /* float: right; */
+  /* align-self: ; */
+  display: flex;
+  align-items: center;
+  background-color: rgb(243, 243, 243);
+  width: 250px;
+  height: 35px;
+  /* border: 2px solid black; */
+  border-radius: 100px;
+  text-align: right;
+}
+
+.search-box-img {
+  margin-left: 10px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+
+.search-box-input {
+  border: none;
+  outline: none;
+  width: 70%;
+  background-color: rgb(243, 243, 243);
+}
+
+/* 顶部搜索框右边按钮 */
+.top-right-btn1{
+  margin-left: 50px;
+  margin-right: 10px;
+}
+
+
+/* 页面中间的背景颜色 */
+.center-container-bgc {
+  background-color: rgb(232, 211, 194);
+  /* height: 1000px; */
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+/* 页面中间的容器 */
+.center-container {
+  width: 1344px;
+  /* height: 1000px; */
+  margin: 0 auto;
+  padding-bottom: 30px;
+  background-color: white;
+  border-radius: 24px;
+  
+}
+
+/* 页面上半部分 */
+.center-container-top {
+  /* 上右下左 */
+  padding: 10px 0 40px 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* 页面的上左半部分*/
+.center-container-top-left{
+}
+
+/* 商品大图 */
+.center-container-top-img{
+  border-radius: 12px;
+  width: 450px;
+  height: 450px;
+}
+/* 商品缩放选择图 */
+.center-container-top-ul {
+  list-style: none;
+  display: flex;
+  /* 上左下右 */
+  margin: 5px 0 0 0;
+  padding: 0;
+  border-radius: 6px;
+}
+
+.center-container-top-ul > li {
+  
+  border-radius: 6px;
+  margin-right: 5px;
+  cursor: pointer;
+  border: 1.5px solid white;
+}
+
+.center-container-top-ul > li:hover {
+  border: 1.5px solid red;
+}
+
+.center-container-top-ul img {
+  width: 68px;
+  height: 68px;
+  border-radius: 6px;
+}
+
+/* 主页右上侧部分 */
+.center-container-top-right {
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 30px;
+}
+
+.center-container-top-title{
+  line-height: 28px;
+  font-size: 20px;
+  /* font-family: PingFang SC; */
+  font-weight: bolder;
+}
+
+.center-container-top-sold {
+  color: rgb(153, 153, 153);
+  height: 14px;
+  line-height: 14px;
+  font-size: 14px;
+}
+
+/* 商品价格 */
+.center-container-top-price {
+  color: red;
+  line-height: 60px;
+}
+
+.center-container-top-price>span:first-child {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.center-container-top-price>span:last-child {
+  font-size: 28px;
+  line-height: 28px;
+}
+
+/* 产地 */
+.producer{
+  line-height: 28px;
+  font-size: 16px;
+  color: rgb(153, 153, 153);
+}
+
+.producerName{
+  margin-left: 5px;
+  line-height: 28px;
+  font-size: 16px;
+  font-weight: bolder;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* 商品信息 */
+.goods-detail{
+  margin-top: 20px;
+  line-height: 28px;
+}
+
+/* 购买数量 */
+.buy-count {
+  margin-top: 20px;
+  line-height: 28px;
+  font-size: 16px;
+  color: rgb(153, 153, 153);
+}
+
+.btn-group-count {
+  height: 40px;
+}
+
+.btn-group-count button {
+  width: 40px;
+}
+
+.count-input {
+  width: 50px;
+  cursor: text;
+  text-align: center;
+}
+
+
+
+/* 立即购买和加入购物车按钮 */
+.btn-group-div {
+  margin-top: 60px;
+  margin-left: 50px;
+}
+
+.buy-button,.shopping-button{
+  width: 150px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+}
+
+/* 页面右侧固定内容 */
+.right-fixed-div {
+  position: fixed;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: fit-content;
+  /* height: 250px; */
+  padding: 10px 10px;
+  background-color: white;
+  border-radius: 20px 0 0 20px;
+}
+
+
+.right-fixed-div>div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+/* 固定内容图片 */
+.right-fixed-div img {
+  width: 30px;
+  height: 30px;
+}
+
+/* 固定内容文字 */
+.right-fixed-div > div > div {
+  color: gray;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+hr {
+  width: 95%;
+  margin: auto;
+}
+
+/* 主体下半部分 */
+.center-container-bottom {
+  margin: 40px 40px;
+  /* width: 95%; */
+
+}
+
+/* 推荐部分 */
+.recommend {
+  margin-bottom: 40px;
+}
+
+.bottom-title > div {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.bottom-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.bottom-title > img {
+  width: 32px;
+  height: 32px;
+  margin-right: 6px;
+}
+
+
+/* 推荐部分主体 */
+
+.recommend-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.recommend-col {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 220px;
+  height: 300px;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.recommend-col > img {
+  border-radius: 12px;
+  height: 220px;
+  width: 220px;
+}
+
+.recommend-title {
+  line-height: 20px;
+  font-size: 15px;
+  letter-spacing:1px;
+  color: black;
+}
+
+.recommend-title:hover {
+  color: rgb(255, 80, 0);
+}
+
+.recommend-col > .price {
+  color: rgb(255, 80, 0);
+}
+
+.price > span:last-child {
+  font-size: 20px;
+  margin-left: -6px;
+}
+
+/* 评论部分 */
+
+/* .center-container-bottom>hr {
+  width: 100%;
+} */
+
+.comment {
+  margin-top: 40px;
+}
+
+.comment-body {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start; */
+  margin: 50px 0;
+}
+
+.form-floating > .form-control {
+  background-color: rgb(245, 245, 245);
+  height: 150px!important;
+}
+
+.form-floating > label {
+  font-size: 20px;
+}
+
+.one-comment {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 40px;
+
+}
+
+.commentator-head {
+  border-radius: 50%;
+  width: 75px;
+}
+
+.comment-container {
+  margin-left: 30px;
+  width: 90%;
+}
+
+.commentator-name {
+  font-size: 20px;
+  font-weight: bolder;
+  margin-bottom: 5px;
+}
+
+.comment-content {
+  font-size: 20px;
+  line-height: 32px;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.comment-likes {
+  float: right;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  cursor: pointer;
+
+}
+
+.comment-likes-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.comment-likes-num{
+  color: red;
+}
+

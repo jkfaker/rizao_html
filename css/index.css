@@ -1,0 +1,113 @@
+/*header：导航栏开始*/
+a {
+    text-decoration: none!important;
+}
+#header{
+    width: 100%;
+    height: 88px;
+    display: flex;
+    justify-content: center;
+}
+.top-menu{
+    width: 1200px;
+    height: 88px;
+}
+.top-menu ul{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 19px;
+    font-size: 14px;
+    color: #333;
+}
+.top-menu .btn input{
+    outline: none;
+    height: 30px;
+    border: 1px solid #4381ff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.top-menu .btn input:nth-child(1){
+    width: 62px;
+    color: #4381ff;
+    background-color: #FFFFFF;
+    margin-left: 25px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.top-menu .btn input:nth-child(2){
+    width: 80px;
+    color: #FFFFFF;
+    background-color: #4381ff;
+}
+/*header：导航栏结束*/
+
+/*banner：轮播图开始*/
+#banner{
+    height: 600px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 100px;
+}
+#banner .slide{
+    height: 100%;
+    width: 400%;
+}
+#banner .slide a{
+    display: inline-block;
+    height: 100%;
+    width: 25%;
+    float: left;
+}
+#banner .slide img{
+    height: 100%;
+    width: 100%;
+}
+.slick-dots{
+    position: absolute;
+    width: 75px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    left: 50%;
+    bottom: 21px;
+    transform: translateX(-50%);
+}
+/*.slick-dots li label{*/
+/*    width: 10px;*/
+/*    height: 10px;*/
+/*    display: inline-block;*/
+/*    background-color: #DAE6FF;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*banner：轮播图结束*/
+
+/* 右上方固定图标“联系我们” */
+.fixed-contact{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: orange;
+    line-height: 20px;
+    font-size: 17px;
+    color: black;
+    height: 80px;
+    width: 80px;
+    vertical-align: bottom;
+    border-radius: 50%;
+    position: fixed;
+    top: 75%;
+    right: 5%;
+    z-index: 9900;
+    text-decoration: none;
+}
+
+
+/* 轮播图下的大鞋子 */
+.shoes-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
